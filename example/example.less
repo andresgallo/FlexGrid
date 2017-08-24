@@ -1,0 +1,31 @@
+@import (reference) '../src/FlexGrid';
+@import 'colorExample'; 
+
+//The code below is how one would actually use FlexGrid
+
+
+/* EXAMPLE of a grid with 4 columns (25% wide) with 20px margins in between */
+[data-example="1"] {
+    .FlexGridMakeSizes(@margin: 20px, @width: 25%);
+}
+
+/* EXAMPLE of a grid with 2 columns (50%) with 20px between items verticall and 10 */
+[data-example="2"] {
+    .FlexGridMakeSizes(@margin: 20px 10px, @width: 50%);
+}
+
+/* EXAMPLE of a grid with items 300px wide and no margins */
+[data-example="3"] {
+    .FlexGridMakeSizes(@margin: 0px, @width: 300px);
+}
+
+/* EXAMPLE of grid where items are not direct children of the container */
+[data-example="4"] {
+    @itemSelector: ~'.grid-item'; // Explicityly specify 
+    .FlexGridMakeSizes(@margin: 20px, @width: 33.33%, @sibling: @itemSelector);
+}
+
+
+.exampleOfFlexSpaces {
+  .FlexGridMakeSizes(@margin: 10px, @flexSpaces: 2 3, @width: 33.33%); //enable 2 and 3 flexspaces
+}

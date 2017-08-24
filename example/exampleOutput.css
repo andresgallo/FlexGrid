@@ -1,0 +1,154 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+}
+select,
+option {
+  font-size: 16px;
+}
+.grid {
+  counter-reset: myItemCounter;
+}
+.grid-item {
+  text-align: center;
+}
+.grid-item:nth-child(odd) {
+  background: green;
+}
+.grid-item:nth-child(even) {
+  background: orange;
+}
+.grid-item:before {
+  content: counter(myItemCounter);
+  counter-increment: myItemCounter;
+  display: block;
+  padding: 20px;
+}
+/* EXAMPLE of a grid with 4 columns (25% wide) with 20px margins in between */
+[data-example="1"] {
+  display: flex;
+  flex-wrap: wrap;
+  overflow: hidden;
+  margin: -10px -10px;
+}
+[data-example="1"] > * {
+  margin: 10px 10px;
+  flex: 1;
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: calc(25% - 20px);
+  max-width: calc(25% - 20px);
+  width: calc(25% - 20px);
+}
+[data-example="1"] > *[data-flexspace='2'] {
+  flex: 2;
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: calc(50% - 20px);
+  max-width: calc(50% - 20px);
+  width: calc(50% - 20px);
+}
+/* EXAMPLE of a grid with 2 columns (50%) with 20px between items verticall and 10 */
+[data-example="2"] {
+  display: flex;
+  flex-wrap: wrap;
+  overflow: hidden;
+  margin: -10px -5px;
+}
+[data-example="2"] > * {
+  margin: 10px 5px;
+  flex: 1;
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: calc(50% - 10px);
+  max-width: calc(50% - 10px);
+  width: calc(50% - 10px);
+}
+[data-example="2"] > *[data-flexspace='2'] {
+  flex: 2;
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: calc(100% - 10px);
+  max-width: calc(100% - 10px);
+  width: calc(100% - 10px);
+}
+/* EXAMPLE of a grid with items 300px wide and no margins */
+[data-example="3"] {
+  display: flex;
+  flex-wrap: wrap;
+  overflow: hidden;
+  margin: 0px 0px;
+}
+[data-example="3"] > * {
+  margin: 0px 0px;
+  flex: 1;
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: 300px;
+  max-width: 300px;
+  width: 300px;
+}
+[data-example="3"] > *[data-flexspace='2'] {
+  flex: 2;
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: 600px;
+  max-width: 600px;
+  width: 600px;
+}
+/* EXAMPLE of grid where items are not direct children of the container */
+[data-example="4"] {
+  display: flex;
+  flex-wrap: wrap;
+  overflow: hidden;
+  margin: -10px -10px;
+}
+[data-example="4"] .grid-item {
+  margin: 10px 10px;
+  flex: 1;
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: calc(33.33% - 20px);
+  max-width: calc(33.33% - 20px);
+  width: calc(33.33% - 20px);
+}
+[data-example="4"] .grid-item[data-flexspace='2'] {
+  flex: 2;
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: calc(66.66% - 20px);
+  max-width: calc(66.66% - 20px);
+  width: calc(66.66% - 20px);
+}
+.exampleOfFlexSpaces {
+  display: flex;
+  flex-wrap: wrap;
+  overflow: hidden;
+  margin: -5px -5px;
+}
+.exampleOfFlexSpaces > * {
+  margin: 5px 5px;
+  flex: 1;
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: calc(33.33% - 10px);
+  max-width: calc(33.33% - 10px);
+  width: calc(33.33% - 10px);
+}
+.exampleOfFlexSpaces > *[data-flexspace='2'] {
+  flex: 2;
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: calc(66.66% - 10px);
+  max-width: calc(66.66% - 10px);
+  width: calc(66.66% - 10px);
+}
+.exampleOfFlexSpaces > *[data-flexspace='3'] {
+  flex: 3;
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: calc(99.99% - 10px);
+  max-width: calc(99.99% - 10px);
+  width: calc(99.99% - 10px);
+}

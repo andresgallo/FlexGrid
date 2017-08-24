@@ -1,0 +1,47 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <title>FlexGrid Sample</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="exampleOutput.css">
+    </head>
+    <body>
+      <h1>EXAMPLES</h1>
+      <select id="exampleSwitcher">
+        <option value="1">[data-example=1]: Grid with 4 columns (25% wide) with 20px margins in between</option>
+        <option value="2">[data-example=2]: Grid with 2 columns (50%) with 20px between items verticall and 10</option>
+        <option value="3">[data-example=3]: Grid with items 300px wide and no margins</option>
+        <option value="4">[data-example=4]: Explicitly setting selector for the items.. Sized as thirds. Useful if items are not direct children</option>
+      </select>
+
+      <hr />
+      
+      <div class="grid" data-example>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+      </div>
+
+
+      <h2>This example shows the use of data-flexspace to make items span multiple columns</h2>
+      <div class="grid exampleOfFlexSpaces">
+        <div class="grid-item" data-flexspace="3"></div>
+        <div class="grid-item" data-flexspace="2"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item" data-flexspace="2"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+      </div>
+
+
+
+      <script src="example.js" async></script>
+    </body>
+</html>

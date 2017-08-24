@@ -1,0 +1,34 @@
+//THIS FILE IS NOT RELATED to the use of flexgrid... Its sole purpose is to color the boxes 
+//to make the examples clearer
+
+html, body { // reset
+  padding: 0;
+  margin: 0;
+}
+
+select, option {
+  font-size: 16px;
+}
+
+.grid {
+  counter-reset: myItemCounter;
+}
+
+.grid-item { //Color the items to make examples more clear
+  text-align: center;
+
+  &:nth-child(odd) {
+    background: green;
+  }
+
+  &:nth-child(even) {
+    background: orange;
+  }
+
+  &:before {
+    content: counter(myItemCounter);
+    counter-increment: myItemCounter;
+    display: block;
+    padding: 20px;
+  }
+}

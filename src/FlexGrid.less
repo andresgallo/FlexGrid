@@ -1,0 +1,107 @@
+// v1.0.0
+// lesshint selectorNaming: false
+
+//////////////////////////////////////////////////////////////////////////////////////////
+//To use FlexGrid just use mixin `.FlexGridMakeSizes` wherever you need a custom layout //
+// EXAMPLE of a grid with 4 columns (25% wide) with 20px margins in between
+//  .GridContainer {
+//    .FlexGridMakeSizes(@margin: 20px, @width: 25%);
+//  }
+//
+// EXAMPLE of a grid with 2 columns (50%) with 20px between items verticall and 10 horizontally
+//  .GridContainer {
+//    .FlexGridMakeSizes(@margin: 20px 10px, @width: 50%);
+//  }
+//
+// EXAMPLE of a grid with items 300px wide and no margins
+//  .GridContainer {
+//    .FlexGridMakeSizes(@margin: 0px, @width: 300px);
+//  }
+//
+//  ADVANCED Settings
+//  @sibling: This can be used to tell the mixin the class of the items in the list
+//    When using carousels for example the DEFAULT direct child selector may not always be correct
+//    to target the siblings
+//  @flexSpaces: Using [data-flexspace=n] where n is a number allows you to tell
+//    specific items to span multiple columns
+//////////////////////////////////////////////////////////////////////////////////////////
+
+.FlexGridBreakNewLine {
+    margin: 0 !important; // lesshint importantRule: false
+    flex-basis: 100% !important; // lesshint importantRule: false
+    max-width: 100%;
+}
+
+//@margin:     Takes one or two pixel values to define the margins between grid items
+//@width:      [px value|% value] - Size of the items for a single
+//              flexspace.
+//@flexspaces: [array of integers] (example: 2 3 4 )- Which flexspaces are available
+//              to the module... For example an item with 'data-flexspace="2"' will span two columns.
+//              If you want to have some items span 2 and others 3, set this to (2 3) for example.
+//@sibling:     In cases javascript introduces HTML elements in between grid container and items,
+//               you can pass a selector to target the items correctly when using this mixin
+
+.FlexGridMakeSizes(@margin: 20px 20px, @width: 25%, @flexSpaces: 2, @sibling: ~'> *') {
+    display: flex;
+    flex-wrap: wrap;
+    overflow: hidden;
+
+    @marginVertical: extract(@margin, 1);
+
+    .formatMarginVar(@margin) when (length(@margin) = 1) {
+        @marginHorizontal: @margin;
+    }
+
+    .formatMarginVar(@margin) when (length(@margin) = 2) {
+        @marginHorizontal: extract(@margin, 2);
+    }
+
+    .formatMarginVar(@margin);
+
+    @halfMargin: (@marginVertical / 2) (@marginHorizontal / 2);
+
+    .widthRules(@width, @marginHorizontal, @value) {
+        flex: @value;
+        flex-grow: 0;
+        flex-shrink: 0;
+
+        & when (ispercentage(@width)) {
+            @wCalc: @width * @value;
+            @w: calc(~'@{wCalc} - @{marginHorizontal}');
+            flex-basis: @w;
+            // for IE:
+            max-width: @w;
+            width: @w;
+        }
+
+        & when (ispixel(@width)) or (isunit(@width, vw)) {
+            @w: (@width * @value) + (@marginHorizontal * (@value - 1));
+            flex-basis: @w;
+            // for IE:
+            max-width: @w;
+            width: @w;
+        }
+    }
+
+    .makeFlexSpaceRules() {
+        .iter(length(@flexSpaces));
+
+        .iter(@i) when (@i > 0) {
+            .iter(@i - 1);
+            @value: extract(@flexSpaces, @i);
+
+            &[data-flexspace='@{value}'] {
+                .widthRules(@width, @marginHorizontal, @value);
+            }
+        }
+    }
+
+    margin: (extract(@halfMargin, 1) * -1) (extract(@halfMargin, 2) * -1);
+
+    & @{sibling} {
+        margin: @halfMargin;
+        .widthRules(@width, @marginHorizontal, 1);
+        .makeFlexSpaceRules();
+    }
+
+}
