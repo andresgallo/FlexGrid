@@ -7,6 +7,7 @@ Less Utility to quickly generate precise liquid and px perfed grid layouts
 To use FlexGrid first import Flexgrid into yourproject
 ```less
   @import (reference) 'FlexGrid';
+  @import (reference) 'FlexGridFlickityPlugin' // add this one also if using flickety carousel in some of the grids
 ```
 
 One imported just use *.FlexGridMakeSizes* mixin wherever you need a custom grid layout. This may be done for specific breakpoints or globally. 

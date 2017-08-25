@@ -40,8 +40,12 @@
 //              If you want to have some items span 2 and others 3, set this to (2 3) for example.
 //@sibling:     In cases javascript introduces HTML elements in between grid container and items,
 //               you can pass a selector to target the items correctly when using this mixin
-
 .FlexGridMakeSizes(@margin: 20px 20px, @width: 25%, @flexSpaces: 2, @sibling: ~'> *') {
+    .FlexGridMakeSizesAbstract(@margin, @width, @flexSpaces, @sibling);
+}
+
+// Using an abstract class so plugins can be built that override and add 
+.FlexGridMakeSizesAbstract(@margin: 20px 20px, @width: 25%, @flexSpaces: 2, @sibling: ~'> *') {
     display: flex;
     flex-wrap: wrap;
     overflow: hidden;
@@ -103,5 +107,4 @@
         .widthRules(@width, @marginHorizontal, 1);
         .makeFlexSpaceRules();
     }
-
 }

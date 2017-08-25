@@ -1,0 +1,23 @@
+.FlexGridMakeSizes(@margin: 20px 20px, @width: 25%, @flexSpaces: 2, @sibling: ~'> *') {
+  .FlexGridMakeSizesAbstract(@margin, @width, @flexSpaces, @sibling);
+
+  @marginVertical: extract(@margin, 1);
+
+  .formatMarginVar(@margin) when (length(@margin) = 1) {
+      @marginHorizontal: @margin;
+  }
+
+  .formatMarginVar(@margin) when (length(@margin) = 2) {
+      @marginHorizontal: extract(@margin, 2);
+  }
+
+  .formatMarginVar(@margin);
+
+  &.flickity-enabled {
+    display: block;
+  }
+
+  .flickity-viewport {
+    left: @marginHorizontal / 2;
+  }
+}
